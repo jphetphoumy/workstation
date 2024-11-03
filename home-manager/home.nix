@@ -1,10 +1,26 @@
-{ config, pkgs, ... }:
+{ config, pkgs, username, ... }:
 
 {
+
+  imports = [
+    ./editor.nix
+    ./tool.nix
+    ./shell.nix
+    ./sway.nix
+    ./eww.nix
+  ];
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "jphetphoumy";
-  home.homeDirectory = "/home/jphetphoumy";
+  home.username = username; 
+  home.homeDirectory = "/home/${username}";
+  devops.tool.ansible = {
+	enable = true;
+  };
+
+  devops.tool.kubernetes = {
+	enable = true;
+	kAlias = true;
+  };
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release

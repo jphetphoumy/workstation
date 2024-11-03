@@ -14,14 +14,19 @@
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      username = "jphetphoumy";
     in {
-      homeConfigurations."jphetphoumy" = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
-        modules = [ ./home.nix ];
-
+        modules = [ 
+		./home.nix
+	];
+	extraSpecialArgs = {
+		inherit username;	
+	};
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
       };
